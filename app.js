@@ -99,8 +99,12 @@ function displayTotal(){
         totalCost += product.price * product.quantity;
         totalProducts += product.quantity;
     });
-    total.innerHTML = `total (${totalProducts} products): ${totalCost} euros <br>
-      <button onclick="buyout(${cart},${totalCost}))">buyout</button>`
+    
+const finalPrice = totalCost >= 100 ? totalCost - (totalCost * 10 / 100) : totalCost;
+
+    total.innerHTML = `total (${totalProducts} products): ${finalPrice} euros <br>
+    ${totalCost >=100 ? `Total price is over 100 euro. You have 10% discount. <br>` : ''}
+      <button onclick='buyoutProducts(${JSON.stringify(cart)},${finalPrice}))'>buyout</button>`
 
   
 }
@@ -112,16 +116,5 @@ function removeItem(id) {
   }
 
   function buyoutProducts(totalCost,cart){
-    // if (totalCost > 100) {
-    //     totalCost = totalCost-totalCost*10/100;
-    //     console.log(cart);
-    //     return `
-    //     <div>asdasd</div>`
-    // } else if (total<100){
-    //     console.log(cart);
-    //     return `
-    //     <div>asdasd</div>`
-    // }
-    
-    console.log(cart);
+      console.log(cart,totalCost);
   }
